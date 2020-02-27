@@ -46,16 +46,18 @@ def get_pet_labels(image_dir):
     #Create results dictionary using filenames and pet image labels 
     results_dic = dict()
     for filename in filename_list:
-        name=filename.lower().split('_')
-        petlabel=""
-        for word in name:
-            if word.isalpha():
-                petlabel+=word+' '
-        petlabel=petlabel.strip()
-        if filename not in results_dic:
-            results_dic[filename]=[petlabel]
-        else:
-            print("**Warning: Key=",filename," already exists in results_dic with Value=",results_dic[filename])
+        #Process only the filenames that do not start with '.'
+        if filename[0] != '.':
+            name=filename.lower().split('_')
+            petlabel=""
+            for word in name:
+                if word.isalpha():
+                    petlabel+=word+' '
+            petlabel=petlabel.strip()
+            if filename not in results_dic:
+                results_dic[filename]=[petlabel]
+            else:
+                print("**Warning: Key=",filename," already exists in results_dic with Value=",results_dic[filename])
 
     # Replace None with the results_dic dictionary that you created with this
     # function
